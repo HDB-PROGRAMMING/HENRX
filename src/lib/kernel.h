@@ -9,30 +9,32 @@
 
 #include "types.h"
 
-Ui16* vga_buffer;
+static Ui16* vga_buffer;
+static Ui32  vga_index;
+static Ui32  next_line = 1;
+
+int __ascii_numbers[10] = { 
+    0x30,
+    0x31,
+    0x32,
+    0x33,
+    0x34,
+    0x35,
+    0x36,
+    0x37,
+    0x38,
+    0x39
+};
+
 
 #include "vga.h"
+#define __def_back_color BLACK
+#define __def_fore_color WHITE
+
+#include "stdfn.h"
+#include "keys.h"
 #include "io.h"
 //HENRX kernel modules
-
-enum vga_color {
-    BLACK,
-    BLUE,
-    GREEN,
-    CYAN,
-    RED,
-    MAGENTA,
-    BROWN,
-    GREY,
-    DARK_GREY,
-    BRIGHT_BLUE,
-    BRIGHT_GREEN,
-    BRIGHT_CYAN,
-    BRIGHT_RED,
-    BRIGHT_MAGENTA,
-    YELLOW,
-    WHITE,
-};
 
 #endif
 // ginger kernel header

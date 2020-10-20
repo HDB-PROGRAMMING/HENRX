@@ -1,9 +1,62 @@
 #ifndef HENRX_IO_H
 #define HENRX_IO_H
 
-void print(char text[], Ui8 fore_color, Ui8 back_color) {
-	for (int i = 0; text[i] != NULL; i++) {
-		vga_buffer[i] = vga_entry(text[i], fore_color, back_color);
+Ui8 __read_port(Ui16 port) {
+	Ui8 ret;
+	asm volatile("inb %1, %0" : "=a"(ret) : "d"(port));
+	return ret;
+}
+
+void __print_port(Ui16 port, Ui8 data) {
+	asm volatile("outb %0, %1" : "=a"(data) : "d"(port));
+}
+
+char __kernel_input() {
+	char character = 0;
+	while ((character = __read_port(KEYBOARD_PORT)) != 0) {
+		if (character > 0)
+			return character;
+	}
+
+	return character;
+}
+
+void __new_line() {
+	if (next_line >= 55) {
+		next_line = 0;
+		clear_vga_buffer(&vga_buffer, __def_fore_color, __def_back_color);
+	}
+
+	vga_index = 80 * next_line;
+	next_line++;
+}
+
+void __char_log(char character, Ui8 fore_color, Ui8 back_color) {
+	vga_buffer[vga_index] = vga_entry(character, fore_color, back_color);
+	vga_index++;
+}
+
+void __kernel_log(String str, Ui8 fore_color, Ui8 back_color) {
+	Ui32 index = 0;
+
+	while (str[index]) {
+		__char_log(str[index], fore_color, back_color);
+		index++;
+	}
+}
+
+void __kernel_int(int num, Ui8 fore_color, Ui8 back_color) {
+	char str_num[digits(num) + 1];
+	ItoA(num, str_num);
+	__kernel_log(str_num, fore_color, back_color);
+}
+
+void sleep(Ui32 timer_count) {
+	while (1) {
+		asm volatile("nop");
+		timer_count--;
+		if (timer_count <= 0)
+			break;
 	}
 }
 

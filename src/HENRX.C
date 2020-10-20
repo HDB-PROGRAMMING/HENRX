@@ -1,6 +1,7 @@
 #include "lib/kernel.h"
 
-void kernel_entry() {
-	print("Hello, World!", WHITE, BLACK);
+void __kernel_init() {
+	__kernel_log("HENRX kernel ready!!", __def_fore_color, __def_back_color);
+
 }
-// ginger kernel main file
+// HENRX kernel main file

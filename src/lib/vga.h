@@ -1,6 +1,26 @@
 #ifndef HENRX_VGA_H
 #define HENRX_VGA_H
 
+enum vga_color {
+    BLACK,
+    BLUE,
+    GREEN,
+    CYAN,
+    RED,
+    MAGENTA,
+    BROWN,
+    GREY,
+    DARK_GREY,
+    BRIGHT_BLUE,
+    BRIGHT_GREEN,
+    BRIGHT_CYAN,
+    BRIGHT_RED,
+    BRIGHT_MAGENTA,
+    YELLOW,
+    WHITE,
+};
+//VGA colors
+
 Ui16 vga_entry(unsigned char ch, Ui8 fore_color, Ui8 back_color) {
     Ui16 ax = 0;
     Ui8  ah = 0, al = 0;

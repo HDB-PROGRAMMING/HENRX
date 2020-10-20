@@ -29,7 +29,7 @@ stack_top:
 
 _start:
 	mov $stack_top, %esp
-	call kernel_entry
+	call __kernel_init
 	cli
 
 
