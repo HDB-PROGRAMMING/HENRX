@@ -4,14 +4,22 @@
 #define VGA_ADDRESS 0xB8000
 #define BUFSIZE     2200
 
+#define TRUE        1
+#define FALSE       0
+
 #define NULL        0
 //HENRX consts
 
 #include "types.h"
 
-static Ui16* vga_buffer;
-static Ui32  vga_index;
-static Ui32  next_line = 1;
+static String* commands;
+
+static Ui32    command_char_num = 0;
+static Ui32    command_num = 0;
+
+static Ui16*   vga_buffer;
+static Ui32    vga_index;
+static Ui32    next_line = 1;
 
 int __ascii_numbers[10] = { 
     0x30,
@@ -37,4 +45,4 @@ int __ascii_numbers[10] = {
 //HENRX kernel modules
 
 #endif
-// ginger kernel header
+//HENRX kernel header

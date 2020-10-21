@@ -21,6 +21,20 @@ char __kernel_input() {
 	return character;
 }
 
+String __keboard_input() {
+	while (__kernel_input() != ' ') {
+		commands[command_num][command_char_num] = __kernel_input();
+		command_char_num++;
+
+	} if (__kernel_input() == ' ') {
+		command_char_num = 0;
+		command_num++;
+
+		return commands[command_num + 1];
+	}
+}
+//HENRX input
+
 void __new_line() {
 	if (next_line >= 55) {
 		next_line = 0;
@@ -36,7 +50,7 @@ void __char_log(char character, Ui8 fore_color, Ui8 back_color) {
 	vga_index++;
 }
 
-void __kernel_log(String str, Ui8 fore_color, Ui8 back_color) {
+void __string_log(String str, Ui8 fore_color, Ui8 back_color) {
 	Ui32 index = 0;
 
 	while (str[index]) {
@@ -45,11 +59,12 @@ void __kernel_log(String str, Ui8 fore_color, Ui8 back_color) {
 	}
 }
 
-void __kernel_int(int num, Ui8 fore_color, Ui8 back_color) {
+void __integer_log(int num, Ui8 fore_color, Ui8 back_color) {
 	char str_num[digits(num) + 1];
 	ItoA(num, str_num);
-	__kernel_log(str_num, fore_color, back_color);
+	__string_log(str_num, fore_color, back_color);
 }
+//HENRX output
 
 void sleep(Ui32 timer_count) {
 	while (1) {
