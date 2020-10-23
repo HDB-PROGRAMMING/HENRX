@@ -22,4 +22,4 @@ bins:
 	@ld -m elf_i386 -T src/linker.ld bin/HENRX.o bin/boot.o -o bin/HENRX.bin -nostdlib
 
 run:
-	@qemu-system-x86_64 -cdrom bin/HENRX.iso
+	@qemu-system-x86_64 -cdrom bin/HENRX.bin
