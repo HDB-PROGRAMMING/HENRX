@@ -21,7 +21,7 @@ char __kernel_input() {
 	return character;
 }
 
-String __keboard_input() {
+String __keyboard_input() {
 	while (__kernel_input() != ' ') {
 		commands[command_num][command_char_num] = __kernel_input();
 		command_char_num++;

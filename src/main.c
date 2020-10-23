@@ -1,10 +1,11 @@
 #include "lib/kernel.h"
 #include "os/henrx.h"
 
-void init() {
+String init() {
+	return "";
 }
 
-void loop() {
-
+String loop() {
+	return "HENRX OS";
 }
 //HENRX kernel main file

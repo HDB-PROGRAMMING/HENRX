@@ -42,6 +42,7 @@ int __ascii_numbers[10] = {
 #include "stdfn.h"
 #include "keys.h"
 #include "io.h"
+#include "aliases.h"
 //HENRX kernel modules
 
 #endif

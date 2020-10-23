@@ -3,14 +3,25 @@
 
 #include "cmds.h"
 
-void init();
-void loop();
+String init();
+String loop();
 
 void __kernel_init() {
-	init();
+	String initial_msg = init();
+	String loop_msg    = "";
 
-	while (TRUE) {
-		loop();
+	if (strlen(initial_msg) >= 1) {
+		puts(initial_msg);
+		return;
+	}
+
+	LOOP {
+		loop_msg = loop();
+
+		if (strlen(loop_msg) >= 1) {
+			puts(loop_msg);
+			return;
+		}
 	}
 }
 
